@@ -1,0 +1,413 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Alerts Home</title>
+
+<style>
+:root{
+--panel:rgba(17,17,17,.88);
+--border:rgba(255,255,255,.10);
+--text:#fff;
+--muted:rgba(255,255,255,.62);
+
+--accent:#7B2EFF;
+--accent2:#B266FF;
+--clubGlow:rgba(123,46,255,.18);
+}
+
+*{box-sizing:border-box}
+
+html,body{
+margin:0;
+padding:0;
+background:transparent;
+}
+
+body{
+color:var(--text);
+font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+}
+
+.stage{
+min-height:100vh;
+background:
+radial-gradient(1000px 600px at 20% -10%, rgba(255,255,255,.05), transparent 60%),
+linear-gradient(180deg,#000 0%,#050505 100%);
+position:relative;
+overflow:hidden;
+}
+
+.stage::after{
+content:"";
+position:absolute;
+inset:0;
+background:radial-gradient(800px 520px at 80% 18%, var(--clubGlow), transparent 62%);
+opacity:.9;
+pointer-events:none;
+animation:glowPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes glowPulse{
+0%{opacity:.55}
+50%{opacity:1}
+100%{opacity:.55}
+}
+
+.top{
+position:sticky;
+top:0;
+z-index:10;
+backdrop-filter:blur(14px);
+background:rgba(11,13,16,.72);
+border-bottom:1px solid var(--border);
+}
+
+.topInner{
+max-width:1200px;
+margin:0 auto;
+padding:16px 20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.kicker{
+font-size:11px;
+font-weight:900;
+letter-spacing:1.6px;
+text-transform:uppercase;
+}
+
+.subkicker{
+margin-top:6px;
+font-size:12px;
+color:var(--muted);
+font-weight:650;
+}
+
+.pill{
+padding:10px 14px;
+border:1px solid rgba(255,255,255,.14);
+border-radius:999px;
+background:rgba(255,255,255,.04);
+font-size:12px;
+font-weight:800;
+position:relative;
+overflow:hidden;
+white-space:nowrap;
+}
+
+.pill::after{
+content:"";
+position:absolute;
+left:12px;
+right:12px;
+bottom:8px;
+height:3px;
+border-radius:999px;
+background:linear-gradient(90deg, var(--accent), transparent);
+transform:scaleX(.35);
+transform-origin:left;
+transition:.18s ease;
+opacity:.95;
+}
+
+.pill:hover::after{transform:scaleX(1)}
+
+.page{
+max-width:1200px;
+margin:0 auto;
+padding:34px 20px 80px;
+}
+
+.hero{
+display:flex;
+justify-content:space-between;
+align-items:flex-end;
+margin-bottom:18px;
+flex-wrap:wrap;
+}
+
+.name{
+font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;
+font-size:52px;
+text-transform:uppercase;
+letter-spacing:1px;
+line-height:1;
+margin:0;
+}
+
+.tag{
+padding:10px 14px;
+border-radius:999px;
+border:1px solid rgba(255,255,255,.14);
+background:rgba(255,255,255,.04);
+font-size:12px;
+font-weight:900;
+letter-spacing:1px;
+text-transform:uppercase;
+box-shadow:0 0 24px var(--clubGlow);
+}
+
+.heroSub{
+margin:14px 0 0;
+max-width:760px;
+color:var(--muted);
+font-size:14px;
+line-height:1.5;
+}
+
+.card{
+background:var(--panel);
+border:1px solid var(--border);
+border-radius:18px;
+padding:20px;
+transition:.18s ease;
+}
+
+.card:hover{
+transform:translateY(-2px);
+border-color:rgba(255,255,255,.18);
+box-shadow:0 0 28px var(--clubGlow);
+}
+
+.sectionTitle{
+font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;
+font-size:18px;
+text-transform:uppercase;
+margin:0;
+}
+
+.buttonGrid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+margin-top:14px;
+}
+
+@media(max-width:700px){
+.buttonGrid{grid-template-columns:1fr;}
+}
+
+.btn{
+padding:18px 16px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,.14);
+background:rgba(255,255,255,.04);
+color:#fff;
+font-weight:900;
+letter-spacing:.7px;
+font-size:12px;
+text-transform:uppercase;
+cursor:pointer;
+position:relative;
+overflow:hidden;
+text-align:left;
+min-height:110px;
+transition:.14s ease;
+}
+
+.btn::after{
+content:"";
+position:absolute;
+left:12px;
+right:12px;
+bottom:10px;
+height:4px;
+border-radius:999px;
+background:linear-gradient(90deg, var(--accent), transparent);
+transform:scaleX(0);
+transform-origin:left;
+transition:.18s ease;
+}
+
+.btn:hover{
+background:rgba(255,255,255,.08);
+border-color:rgba(255,255,255,.18);
+box-shadow:0 0 28px var(--clubGlow);
+}
+
+.btn:hover::after{transform:scaleX(1)}
+
+.btnTitle{
+display:block;
+font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;
+font-size:22px;
+margin-bottom:8px;
+}
+
+.btnCopy{
+display:block;
+color:var(--muted);
+font-size:12px;
+font-weight:700;
+text-transform:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="stage">
+
+<div class="top">
+<div class="topInner">
+<div>
+<div class="kicker">SECTION: Alerts</div>
+<div class="subkicker" id="clubText">CLUB: —</div>
+</div>
+
+<div class="pill">ALL IN ONE</div>
+
+</div>
+</div>
+
+<div class="page">
+
+<div class="hero">
+<div>
+<h1 class="name">Alerts Home</h1>
+
+<div class="heroSub">
+Create and manage club alerts from one central page.
+</div>
+</div>
+
+<div class="tag" id="clubTag">—</div>
+</div>
+
+<div class="card">
+
+<h2 class="sectionTitle">Quick Access</h2>
+
+<div class="buttonGrid">
+
+<button class="btn" data-key="createAlert">
+<span class="btnTitle">Create Alert</span>
+<span class="btnCopy">Open the alert creation page and publish a new message.</span>
+</button>
+
+<button class="btn" data-key="manageAlerts">
+<span class="btnTitle">Manage Alerts</span>
+<span class="btnCopy">View, edit, and manage existing alerts.</span>
+</button>
+
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+
+let state = {
+clubSlug:"default",
+clubName:"",
+routes:{
+createAlert:"/create-alert",
+manageAlerts:"/manage-alerts"
+}
+};
+
+function clean(v){
+return String(v||"").trim();
+}
+
+function normalizeColor(c){
+c=clean(c);
+if(!c) return "";
+
+const hex=c.replace("#","");
+if(/^[0-9a-fA-F]{6}$/.test(hex)) return "#"+hex;
+return c;
+}
+
+function hexToRgba(hex,a=.18){
+const c=clean(hex).replace("#","");
+if(!/^[0-9a-fA-F]{6}$/.test(c)) return `rgba(123,46,255,${a})`;
+const r=parseInt(c.slice(0,2),16);
+const g=parseInt(c.slice(2,4),16);
+const b=parseInt(c.slice(4,6),16);
+return `rgba(${r},${g},${b},${a})`;
+}
+
+function applyThemeFromPayload(payload){
+const theme=payload?.theme||payload||{};
+
+const accent=
+normalizeColor(theme.accent)||
+normalizeColor(theme.primary)||
+"#7B2EFF";
+
+const accent2=
+normalizeColor(theme.accent2)||
+normalizeColor(theme.secondary)||
+accent;
+
+const glow=
+normalizeColor(theme.clubGlow)||
+hexToRgba(accent,.18);
+
+const r=document.documentElement.style;
+r.setProperty("--accent",accent);
+r.setProperty("--accent2",accent2);
+r.setProperty("--clubGlow",glow);
+}
+
+function render(){
+
+const slug=state.clubSlug||"default";
+const clubLabel=clean(state.clubName)||slug||"—";
+
+document.getElementById("clubText").textContent="CLUB: "+clubLabel;
+document.getElementById("clubTag").textContent=clubLabel;
+
+}
+
+function navigate(key){
+
+const route=state.routes[key];
+
+window.parent.postMessage({
+type:"ALERTS_HOME_NAVIGATE",
+route,
+clubSlug:state.clubSlug
+},"*");
+
+}
+
+window.addEventListener("message",(e)=>{
+
+const m=e.data||{};
+
+if(m.type==="ALERTS_HOME_INIT"){
+
+state.clubSlug=m.clubSlug||"default";
+state.clubName=m.clubName||"";
+
+if(m.routes){
+state.routes={...state.routes,...m.routes};
+}
+
+applyThemeFromPayload(m);
+
+render();
+
+}
+
+});
+
+document.querySelectorAll("[data-key]").forEach(btn=>{
+btn.addEventListener("click",()=>{
+navigate(btn.getAttribute("data-key"));
+});
+});
+
+render();
+
+</script>
+
+</body>
+</html>
