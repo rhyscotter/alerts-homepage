@@ -7,406 +7,677 @@
 
 <style>
 :root{
---panel:rgba(17,17,17,.88);
---border:rgba(255,255,255,.10);
---text:#fff;
---muted:rgba(255,255,255,.62);
+  --panel:rgba(17,17,17,.88);
+  --border:rgba(255,255,255,.10);
+  --text:#fff;
+  --muted:rgba(255,255,255,.62);
 
---accent:#7B2EFF;
---accent2:#B266FF;
---clubGlow:rgba(123,46,255,.18);
+  --accent:#7B2EFF;
+  --accent2:#B266FF;
+  --clubGlow:rgba(123,46,255,.18);
 }
 
 *{box-sizing:border-box}
 
 html,body{
-margin:0;
-padding:0;
-background:transparent;
+  margin:0;
+  padding:0;
+  background:transparent;
 }
 
 body{
-color:var(--text);
-font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
 }
 
 .stage{
-min-height:100vh;
-background:
-radial-gradient(1000px 600px at 20% -10%, rgba(255,255,255,.05), transparent 60%),
-linear-gradient(180deg,#000 0%,#050505 100%);
-position:relative;
-overflow:hidden;
+  min-height:100vh;
+  background:
+    radial-gradient(1000px 600px at 20% -10%, rgba(255,255,255,.05), transparent 60%),
+    linear-gradient(180deg,#000 0%,#050505 100%);
+  position:relative;
+  overflow:hidden;
+}
+
+.stage::before{
+  content:"";
+  position:absolute;
+  inset:-40% -20%;
+  transform:rotate(-14deg);
+  background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.05), rgba(255,255,255,0));
+  opacity:.18;
+  pointer-events:none;
 }
 
 .stage::after{
-content:"";
-position:absolute;
-inset:0;
-background:radial-gradient(800px 520px at 80% 18%, var(--clubGlow), transparent 62%);
-opacity:.9;
-pointer-events:none;
-animation:glowPulse 2.8s ease-in-out infinite;
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(800px 520px at 80% 18%, var(--clubGlow), transparent 62%);
+  opacity:.9;
+  pointer-events:none;
+  animation:glowPulse 2.8s ease-in-out infinite;
 }
 
 @keyframes glowPulse{
-0%{opacity:.55}
-50%{opacity:1}
-100%{opacity:.55}
+  0%{opacity:.55}
+  50%{opacity:1}
+  100%{opacity:.55}
 }
 
 .top{
-position:sticky;
-top:0;
-z-index:10;
-backdrop-filter:blur(14px);
-background:rgba(11,13,16,.72);
-border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:10;
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  background:rgba(11,13,16,.72);
+  border-bottom:1px solid var(--border);
 }
 
 .topInner{
-max-width:1200px;
-margin:0 auto;
-padding:16px 20px;
-display:flex;
-align-items:center;
-justify-content:space-between;
+  max-width:1200px;
+  margin:0 auto;
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  position:relative;
+  z-index:2;
+  flex-wrap:wrap;
 }
 
 .kicker{
-font-size:11px;
-font-weight:900;
-letter-spacing:1.6px;
-text-transform:uppercase;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1.6px;
+  text-transform:uppercase;
 }
 
 .subkicker{
-margin-top:6px;
-font-size:12px;
-color:var(--muted);
-font-weight:650;
+  margin-top:6px;
+  font-size:12px;
+  color:var(--muted);
+  font-weight:650;
 }
 
 .pill{
-padding:10px 14px;
-border:1px solid rgba(255,255,255,.14);
-border-radius:999px;
-background:rgba(255,255,255,.04);
-font-size:12px;
-font-weight:800;
-position:relative;
-overflow:hidden;
-white-space:nowrap;
+  padding:10px 14px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  font-size:12px;
+  font-weight:800;
+  position:relative;
+  overflow:hidden;
+  white-space:nowrap;
 }
 
 .pill::after{
-content:"";
-position:absolute;
-left:12px;
-right:12px;
-bottom:8px;
-height:3px;
-border-radius:999px;
-background:linear-gradient(90deg, var(--accent), transparent);
-transform:scaleX(.35);
-transform-origin:left;
-transition:.18s ease;
-opacity:.95;
+  content:"";
+  position:absolute;
+  left:12px;
+  right:12px;
+  bottom:8px;
+  height:3px;
+  border-radius:999px;
+  background:linear-gradient(90deg, var(--accent), transparent);
+  transform:scaleX(.35);
+  transform-origin:left;
+  transition:.18s ease;
+  opacity:.95;
 }
 
 .pill:hover::after{transform:scaleX(1)}
 
 .page{
-max-width:1200px;
-margin:0 auto;
-padding:34px 20px 80px;
+  max-width:1200px;
+  margin:0 auto;
+  padding:34px 20px 80px;
+  position:relative;
+  z-index:2;
 }
 
 .hero{
-display:flex;
-justify-content:space-between;
-align-items:flex-end;
-margin-bottom:18px;
-flex-wrap:wrap;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  margin-bottom:18px;
+  flex-wrap:wrap;
+  gap:12px;
 }
 
 .name{
-font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;
-font-size:52px;
-text-transform:uppercase;
-letter-spacing:1px;
-line-height:1;
-margin:0;
+  font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;
+  font-size:52px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  line-height:1;
+  margin:0;
+  position:relative;
+  padding-bottom:12px;
+}
+
+.name::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  height:6px;
+  width:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg, rgba(255,255,255,.18), transparent);
+  opacity:.9;
 }
 
 .tag{
-padding:10px 14px;
-border-radius:999px;
-border:1px solid rgba(255,255,255,.14);
-background:rgba(255,255,255,.04);
-font-size:12px;
-font-weight:900;
-letter-spacing:1px;
-text-transform:uppercase;
-box-shadow:0 0 24px var(--clubGlow);
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.04);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  box-shadow:0 0 24px var(--clubGlow);
 }
 
 .heroSub{
-margin:14px 0 0;
-max-width:760px;
-color:var(--muted);
-font-size:14px;
-line-height:1.5;
+  margin:14px 0 0;
+  max-width:760px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.5;
+}
+
+.stack{
+  display:grid;
+  gap:14px;
 }
 
 .card{
-background:var(--panel);
-border:1px solid var(--border);
-border-radius:18px;
-padding:20px;
-transition:.18s ease;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:20px;
+  position:relative;
+  overflow:hidden;
+  transition:.18s ease;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:-60% -20%;
+  transform:rotate(-12deg);
+  background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.05), rgba(255,255,255,0));
+  opacity:.22;
+  pointer-events:none;
 }
 
 .card:hover{
-transform:translateY(-2px);
-border-color:rgba(255,255,255,.18);
-box-shadow:0 0 28px var(--clubGlow);
+  transform:translateY(-2px);
+  border-color:rgba(255,255,255,.18);
+  box-shadow:0 0 28px var(--clubGlow);
+}
+
+.cardInner{
+  position:relative;
+  z-index:2;
+}
+
+.cardStrong{
+  box-shadow:0 0 0 1px rgba(255,255,255,.03), 0 0 32px var(--clubGlow);
 }
 
 .sectionTitle{
-font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;
-font-size:18px;
-text-transform:uppercase;
-margin:0;
+  font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;
+  font-size:18px;
+  text-transform:uppercase;
+  margin:0;
+  position:relative;
+  display:inline-block;
+  padding-bottom:10px;
+}
+
+.sectionTitle::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  height:4px;
+  width:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg, rgba(255,255,255,.16), transparent);
+}
+
+.sub{
+  margin-top:10px;
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.45;
 }
 
 .buttonGrid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px;
-margin-top:14px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:14px;
 }
 
-@media(max-width:700px){
-.buttonGrid{grid-template-columns:1fr;}
+.alertsList{
+  display:grid;
+  gap:12px;
+  margin-top:14px;
+}
+
+.alertItem{
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.035);
+  border-radius:16px;
+  padding:16px;
+  position:relative;
+  overflow:hidden;
+}
+
+.alertItem::after{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:4px;
+  border-radius:999px;
+  background:linear-gradient(180deg, var(--accent), var(--accent2));
+  box-shadow:0 0 18px var(--clubGlow);
+}
+
+.alertTop{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
+
+.alertBadge{
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.04);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+
+.alertTitle{
+  font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;
+  font-size:24px;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  margin:0;
+  padding-right:10px;
+}
+
+.alertMeta{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+}
+
+.alertMessage{
+  margin-top:10px;
+  color:#fff;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.emptyState{
+  margin-top:14px;
+  padding:18px;
+  border-radius:16px;
+  border:1px dashed rgba(255,255,255,.14);
+  background:rgba(255,255,255,.025);
+  color:var(--muted);
+  font-size:13px;
+  font-weight:700;
 }
 
 .btn{
-padding:18px 16px;
-border-radius:16px;
-border:1px solid rgba(255,255,255,.14);
-background:rgba(255,255,255,.04);
-color:#fff;
-font-weight:900;
-letter-spacing:.7px;
-font-size:12px;
-text-transform:uppercase;
-cursor:pointer;
-position:relative;
-overflow:hidden;
-text-align:left;
-min-height:110px;
-transition:.14s ease;
+  padding:18px 16px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.04);
+  color:#fff;
+  font-weight:900;
+  letter-spacing:.7px;
+  font-size:12px;
+  text-transform:uppercase;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  text-align:left;
+  min-height:110px;
+  transition:.14s ease;
 }
 
 .btn::after{
-content:"";
-position:absolute;
-left:12px;
-right:12px;
-bottom:10px;
-height:4px;
-border-radius:999px;
-background:linear-gradient(90deg, var(--accent), transparent);
-transform:scaleX(0);
-transform-origin:left;
-transition:.18s ease;
+  content:"";
+  position:absolute;
+  left:12px;
+  right:12px;
+  bottom:10px;
+  height:4px;
+  border-radius:999px;
+  background:linear-gradient(90deg, var(--accent), transparent);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:.18s ease;
 }
 
 .btn:hover{
-background:rgba(255,255,255,.08);
-border-color:rgba(255,255,255,.18);
-box-shadow:0 0 28px var(--clubGlow);
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.18);
+  box-shadow:0 0 28px var(--clubGlow);
 }
 
 .btn:hover::after{transform:scaleX(1)}
 
 .btnTitle{
-display:block;
-font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;
-font-size:22px;
-margin-bottom:8px;
+  display:block;
+  font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;
+  font-size:22px;
+  margin-bottom:8px;
 }
 
 .btnCopy{
-display:block;
-color:var(--muted);
-font-size:12px;
-font-weight:700;
-text-transform:none;
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+  text-transform:none;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:22px;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,.68);
+  border:1px solid rgba(255,255,255,.12);
+  padding:12px 14px;
+  border-radius:14px;
+  color:#fff;
+  font-weight:750;
+  font-size:12px;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  display:none;
+  z-index:9999;
+}
+
+@media(max-width:700px){
+  .buttonGrid{grid-template-columns:1fr;}
+  .name{font-size:40px;}
 }
 </style>
 </head>
 
 <body>
-
 <div class="stage">
 
-<div class="top">
-<div class="topInner">
-<div>
-<div class="kicker">SECTION: Alerts</div>
-<div class="subkicker" id="clubText">CLUB: —</div>
-</div>
+  <div class="top">
+    <div class="topInner">
+      <div>
+        <div class="kicker">SECTION: Alerts</div>
+        <div class="subkicker" id="clubText">CLUB: —</div>
+      </div>
+      <div class="pill">ALL IN ONE</div>
+    </div>
+  </div>
 
-<div class="pill">ALL IN ONE</div>
+  <div class="page">
+    <div class="hero">
+      <div>
+        <h1 class="name">Alerts Home</h1>
+        <div class="heroSub">
+          Create and manage club alerts from one central page.
+        </div>
+      </div>
 
-</div>
-</div>
+      <div class="tag" id="clubTag">—</div>
+    </div>
 
-<div class="page">
+    <div class="stack">
 
-<div class="hero">
-<div>
-<h1 class="name">Alerts Home</h1>
+      <div class="card cardStrong">
+        <div class="cardInner">
+          <h2 class="sectionTitle">Quick Access</h2>
 
-<div class="heroSub">
-Create and manage club alerts from one central page.
-</div>
-</div>
+          <div class="buttonGrid">
+            <button class="btn" data-key="createAlert">
+              <span class="btnTitle">Create Alert</span>
+              <span class="btnCopy">Open the alert creation page and publish a new message.</span>
+            </button>
 
-<div class="tag" id="clubTag">—</div>
-</div>
+            <button class="btn" data-key="manageAlerts">
+              <span class="btnTitle">Manage Alerts</span>
+              <span class="btnCopy">View, edit, and manage existing alerts.</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
-<div class="card">
+      <div class="card">
+        <div class="cardInner">
+          <h2 class="sectionTitle">Current Alerts</h2>
+          <div class="sub">A live view of the latest active alerts for your club.</div>
+          <div id="alertsList" class="alertsList"></div>
+        </div>
+      </div>
 
-<h2 class="sectionTitle">Quick Access</h2>
+    </div>
+  </div>
 
-<div class="buttonGrid">
-
-<button class="btn" data-key="createAlert">
-<span class="btnTitle">Create Alert</span>
-<span class="btnCopy">Open the alert creation page and publish a new message.</span>
-</button>
-
-<button class="btn" data-key="manageAlerts">
-<span class="btnTitle">Manage Alerts</span>
-<span class="btnCopy">View, edit, and manage existing alerts.</span>
-</button>
-
-</div>
-</div>
-
-</div>
+  <div class="toast" id="toast"></div>
 </div>
 
 <script>
-
 let state = {
-clubSlug:"default",
-clubName:"",
-routes:{
-createAlert:"/create-alert",
-manageAlerts:"/manage-alerts"
-}
+  clubSlug:"default",
+  clubName:"",
+  routes:{
+    createAlert:"/create-alert",
+    manageAlerts:"/manage-alerts"
+  },
+  alerts:[]
 };
 
 function clean(v){
-return String(v||"").trim();
+  return String(v || "").trim();
 }
 
 function normalizeColor(c){
-c=clean(c);
-if(!c) return "";
+  c = clean(c);
+  if(!c) return "";
+  c = c.replace(/[;,]+$/g,"").trim();
 
-const hex=c.replace("#","");
-if(/^[0-9a-fA-F]{6}$/.test(hex)) return "#"+hex;
-return c;
+  const hex = c.replace("#","");
+  if(/^[0-9a-fA-F]{6}$/.test(hex)) return "#" + hex.toUpperCase();
+  if(/^rgba?\(/i.test(c)) return c;
+  if(/^[a-zA-Z]+$/.test(c)) return c;
+  return "";
 }
 
-function hexToRgba(hex,a=.18){
-const c=clean(hex).replace("#","");
-if(!/^[0-9a-fA-F]{6}$/.test(c)) return `rgba(123,46,255,${a})`;
-const r=parseInt(c.slice(0,2),16);
-const g=parseInt(c.slice(2,4),16);
-const b=parseInt(c.slice(4,6),16);
-return `rgba(${r},${g},${b},${a})`;
+function hexToRgba(hex, a=.18){
+  const c = clean(hex).replace("#","");
+  if(!/^[0-9a-fA-F]{6}$/.test(c)) return `rgba(123,46,255,${a})`;
+  const r = parseInt(c.slice(0,2),16);
+  const g = parseInt(c.slice(2,4),16);
+  const b = parseInt(c.slice(4,6),16);
+  return `rgba(${r},${g},${b},${a})`;
 }
 
 function applyThemeFromPayload(payload){
-const theme=payload?.theme||payload||{};
+  const theme = payload?.theme || payload || {};
 
-const accent=
-normalizeColor(theme.accent)||
-normalizeColor(theme.primary)||
-"#7B2EFF";
+  const accent =
+    normalizeColor(theme.accent) ||
+    normalizeColor(theme.colorPrimary) ||
+    normalizeColor(theme.primary) ||
+    "#7B2EFF";
 
-const accent2=
-normalizeColor(theme.accent2)||
-normalizeColor(theme.secondary)||
-accent;
+  const accent2 =
+    normalizeColor(theme.accent2) ||
+    normalizeColor(theme.colorSecondary) ||
+    normalizeColor(theme.secondary) ||
+    accent;
 
-const glow=
-normalizeColor(theme.clubGlow)||
-hexToRgba(accent,.18);
+  const glow =
+    normalizeColor(theme.glow) ||
+    normalizeColor(theme.clubGlow) ||
+    hexToRgba(accent,.18);
 
-const r=document.documentElement.style;
-r.setProperty("--accent",accent);
-r.setProperty("--accent2",accent2);
-r.setProperty("--clubGlow",glow);
+  const r = document.documentElement.style;
+  r.setProperty("--accent",accent);
+  r.setProperty("--accent2",accent2);
+  r.setProperty("--clubGlow",glow);
+}
+
+function escapeHtml(s){
+  return String(s || "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function formatDateText(v){
+  const raw = clean(v);
+  if(!raw) return "";
+
+  const d = new Date(raw);
+  if (isNaN(d.getTime())) return raw;
+
+  return d.toLocaleDateString(undefined, {
+    month:"short",
+    day:"numeric",
+    year:"numeric"
+  });
+}
+
+function renderAlerts(){
+  const wrap = document.getElementById("alertsList");
+  const alerts = Array.isArray(state.alerts) ? state.alerts : [];
+
+  if(!alerts.length){
+    wrap.innerHTML = `
+      <div class="emptyState">
+        There are no active alerts right now. Create one using the button above.
+      </div>
+    `;
+    return;
+  }
+
+  wrap.innerHTML = alerts.map((item) => {
+    const title = clean(item.title) || "Club Alert";
+    const message = clean(item.message || item.body || item.text);
+    const audience = clean(item.audience) || "Club Wide";
+    const dateText = formatDateText(item.date || item.createdAt || item.publishDate || item._createdDate);
+    const meta = [audience, dateText].filter(Boolean).join(" • ");
+
+    return `
+      <div class="alertItem">
+        <div class="alertTop">
+          <h3 class="alertTitle">${escapeHtml(title)}</h3>
+          <div class="alertBadge">${escapeHtml(audience)}</div>
+        </div>
+        ${meta ? `<div class="alertMeta">${escapeHtml(meta)}</div>` : ``}
+        <div class="alertMessage">${escapeHtml(message || "No alert message provided.")}</div>
+      </div>
+    `;
+  }).join("");
 }
 
 function render(){
+  const slug = state.clubSlug || "default";
+  const clubLabel = clean(state.clubName) || slug || "—";
 
-const slug=state.clubSlug||"default";
-const clubLabel=clean(state.clubName)||slug||"—";
+  document.getElementById("clubText").textContent = "CLUB: " + clubLabel;
+  document.getElementById("clubTag").textContent = clubLabel;
+  renderAlerts();
+}
 
-document.getElementById("clubText").textContent="CLUB: "+clubLabel;
-document.getElementById("clubTag").textContent=clubLabel;
-
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = String(msg || "");
+  t.style.display = "block";
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(() => {
+    t.style.display = "none";
+  }, 2200);
 }
 
 function navigate(key){
+  const route = state.routes[key];
+  if(!route){
+    toast("Route not configured.");
+    return;
+  }
 
-const route=state.routes[key];
-
-window.parent.postMessage({
-type:"ALERTS_HOME_NAVIGATE",
-route,
-clubSlug:state.clubSlug
-},"*");
-
+  window.parent.postMessage({
+    type:"ALERTS_HOME_NAVIGATE",
+    route,
+    clubSlug:state.clubSlug
+  },"*");
 }
 
 window.addEventListener("message",(e)=>{
+  const m = e.data || {};
 
-const m=e.data||{};
+  if(m.type === "ALERTS_HOME_INIT"){
+    state.clubSlug = m.clubSlug || "default";
+    state.clubName = m.clubName || "";
 
-if(m.type==="ALERTS_HOME_INIT"){
+    if(m.routes){
+      state.routes = { ...state.routes, ...m.routes };
+    }
 
-state.clubSlug=m.clubSlug||"default";
-state.clubName=m.clubName||"";
+    if(Array.isArray(m.alerts)){
+      state.alerts = m.alerts;
+    }
 
-if(m.routes){
-state.routes={...state.routes,...m.routes};
-}
+    applyThemeFromPayload(m);
+    render();
+    return;
+  }
 
-applyThemeFromPayload(m);
+  if(m.type === "SET_CURRENT_ALERTS"){
+    state.alerts = Array.isArray(m.alerts) ? m.alerts : [];
+    renderAlerts();
+    return;
+  }
 
-render();
-
-}
-
+  if(m.type === "TOAST"){
+    toast(m.message || "OK");
+  }
 });
 
 document.querySelectorAll("[data-key]").forEach(btn=>{
-btn.addEventListener("click",()=>{
-navigate(btn.getAttribute("data-key"));
-});
+  btn.addEventListener("click",()=>{
+    navigate(btn.getAttribute("data-key"));
+  });
 });
 
+window.parent.postMessage({ type:"ALERTS_HOME_READY" },"*");
 render();
-
 </script>
 
 </body>
